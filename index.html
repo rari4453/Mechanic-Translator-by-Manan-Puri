@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mechanic translator</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="app">
+
+  <!-- sidebar nav -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-name">Mechanic<br>Translator</div>
+    </div>
+
+    <nav>
+      <button class="nav-item active" data-tab="repair">
+        <span class="nav-icon">🔧</span>
+        Repair Quote
+      </button>
+      <button class="nav-item" data-tab="carbuy">
+        <span class="nav-icon">🚗</span>
+        Car Buying
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-dot" id="statusDot"></div>
+      <span class="status-label" id="statusLabel">checking...</span>
+    </div>
+  </aside>
+
+  <!-- main content -->
+  <main class="content">
+
+    <!-- repair quote panel -->
+    <section id="repair" class="panel active">
+      <div class="hero">
+        <div class="hero-eyebrow">Repair Quote Analyzer</div>
+        <h1>Is your mechanic<br>charging fairly?</h1>
+        <p>Paste any invoice or quote below. You'll get a plain-English breakdown of every charge, typical price ranges, red flags, and what to say to negotiate a better price.</p>
+      </div>
+
+      <div class="form-wrap">
+        <div class="card">
+          <div class="card-label">Your invoice</div>
+
+          <!-- example quotes to try -->
+          <div class="examples-row">
+            <span class="ex-label">Try an example:</span>
+            <button class="pill" data-example="0">Brake job $700</button>
+            <button class="pill" data-example="1">Transmission flush</button>
+            <button class="pill" data-example="2">Full service invoice</button>
+          </div>
+
+          <div class="field">
+            <label for="quoteText">Paste your mechanic quote or invoice</label>
+            <textarea id="quoteText" rows="6" placeholder="e.g.&#10;Brake pad replacement (front) — $180&#10;Brake pad replacement (rear) — $180&#10;Rotor resurfacing — $140&#10;Labor — $200&#10;Total: $700"></textarea>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="carInfo">Your car <span class="opt">(optional)</span></label>
+              <input type="text" id="carInfo" placeholder="e.g. 2018 Honda Civic" />
+            </div>
+            <div class="field">
+              <label for="repairLoc">Your location <span class="opt">(optional)</span></label>
+              <input type="text" id="repairLoc" placeholder="e.g. Dallas, TX" />
+            </div>
+          </div>
+
+          <button class="btn" id="analyzeBtn">
+            Analyze Quote
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <div id="repairResult" class="result-area"></div>
+      </div>
+    </section>
+
+    <!-- car buying panel -->
+    <section id="carbuy" class="panel">
+      <div class="hero">
+        <div class="hero-eyebrow">Car Deal Evaluator</div>
+        <h1>Is this car worth<br>what they're asking?</h1>
+        <p>Enter the listing details and get a clear verdict on whether the price is fair, a list of red flags to watch out for, and an exact negotiation strategy with a dollar target.</p>
+      </div>
+
+      <div class="form-wrap">
+        <div class="card">
+          <div class="card-label">Vehicle details</div>
+
+          <div class="row3">
+            <div class="field">
+              <label for="carYear">Year</label>
+              <input type="text" id="carYear" placeholder="2019" maxlength="4" />
+            </div>
+            <div class="field">
+              <label for="carMake">Make</label>
+              <input type="text" id="carMake" placeholder="Toyota" />
+            </div>
+            <div class="field">
+              <label for="carModel">Model</label>
+              <input type="text" id="carModel" placeholder="Camry" />
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="carMiles">Mileage</label>
+              <input type="text" id="carMiles" placeholder="65,000" />
+            </div>
+            <div class="field">
+              <label for="askPrice">Asking price</label>
+              <input type="text" id="askPrice" placeholder="$18,500" />
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="carCond">Condition</label>
+              <select id="carCond">
+                <option value="excellent">Excellent</option>
+                <option value="good" selected>Good</option>
+                <option value="fair">Fair</option>
+                <option value="rough">Rough / Needs Work</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="buyLoc">Location <span class="opt">(optional)</span></label>
+              <input type="text" id="buyLoc" placeholder="Dallas, TX" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="extraInfo">Extra details <span class="opt">(optional)</span></label>
+            <textarea id="extraInfo" rows="3" placeholder="e.g. One owner, no accidents, new tires, needs AC work..."></textarea>
+          </div>
+
+          <button class="btn" id="carBtn">
+            Evaluate This Deal
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <div id="carResult" class="result-area"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
